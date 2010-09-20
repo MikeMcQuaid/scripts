@@ -4,7 +4,7 @@
 set -e
 
 LOCAL=/home/mike/Documents/Backup/Local
-LOCAL=/home/mike/Documents/Backup/Remote
+REMOTE=/home/mike/Documents/Backup/Remote
 
 # Backup Wordpress files
 cd /var/www/
