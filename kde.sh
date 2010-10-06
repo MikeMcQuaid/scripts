@@ -1,4 +1,8 @@
 #!/bin/sh
+
+# Exit on any command failures
+set -e
+
 # Set environment
 export HOMEBREW="/usr/local"
 export KDEDIR="~/Documents/KDE/install"
