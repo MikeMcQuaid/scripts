@@ -1,7 +1,15 @@
 #!/bin/sh
 # Update all Git and Subversion repositories under the current directory.
 
+which git-up 1>/dev/null
+GITUP=$?
 CURRENT=$PWD
+
+function echorun {
+    echo + $*
+    $*
+}
+
 for GIT in $(find $CURRENT -name .git)
 do
     DIRECTORY=$(dirname $GIT)
@@ -9,15 +17,16 @@ do
     echo == Updating $(basename $DIRECTORY)
     if [ -d .git/svn ]
     then
-        echo = git svn fetch
-        git svn fetch
-        echo = git svn rebase
-        git svn rebase
+        echorun git svn fetch
+        echorun git svn rebase
     else
-        echo = git fetch --all
-        git fetch --all
-        echo = git pull --rebase
-        git pull --rebase
+        if [ $GITUP -eq 0 ]
+        then
+            echorun git up
+        else
+            echorun git fetch --all
+            echorun git pull --rebase
+        fi
     fi
     echo
 done
@@ -31,7 +40,6 @@ do
         continue
     fi
     echo == Updating $(basename $DIRECTORY)
-    echo = svn update
-    svn update
+    echorun svn update
     echo
 done
