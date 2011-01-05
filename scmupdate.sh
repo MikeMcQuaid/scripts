@@ -9,11 +9,13 @@ do
     echo == Updating $(basename $DIRECTORY)
     if [ -d .git/svn ]
     then
+        echo = git svn fetch
+        git svn fetch
         echo = git svn rebase
         git svn rebase
     else
-        echo = git fetch
-        git fetch
+        echo = git fetch --all
+        git fetch --all
         echo = git pull --rebase
         git pull --rebase
     fi
