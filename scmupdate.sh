@@ -20,11 +20,11 @@ do
         echorun git svn fetch
         echorun git svn rebase
     else
+        echorun git fetch --all
         if [ $GITUP -eq 0 ]
         then
             echorun git up
         else
-            echorun git fetch --all
             echorun git pull --rebase
         fi
     fi
