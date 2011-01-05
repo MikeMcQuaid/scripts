@@ -1,5 +1,5 @@
 #!/bin/sh
-# Update all Git and Subversion respostories under the current directory.
+# Update all Git and Subversion repositories under the current directory.
 
 CURRENT=$PWD
 for GIT in $(find $CURRENT -name .git)
