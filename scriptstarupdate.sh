@@ -13,6 +13,6 @@ then
 	exit 1
 fi
 
-wget http://github.com/mikemcquaid/Scripts/tarball/master -O scripts.tar.gz
+wget --no-check-certificate https://github.com/mikemcquaid/Scripts/tarball/master -O scripts.tar.gz
 tar --strip-components=1 -z -x -v -f scripts.tar.gz
 rm scripts.tar.gz
