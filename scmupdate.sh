@@ -4,22 +4,29 @@
 which git-up 1>/dev/null
 GITUP=$?
 CURRENT=$PWD
+# Set to newline to loop over find output correctly on spaced paths.
+IFS=$'\n'
 
 function echorun {
     echo + $*
     $*
 }
 
-for GIT in $(find $CURRENT -name .git)
+for SCM in $(find $CURRENT -name .git) $(find $CURRENT -name .svn)
 do
-    DIRECTORY=$(dirname $GIT)
+    DIRECTORY=$(dirname $SCM)
     cd $DIRECTORY
+    if [[ $DIRECTORY == */Tests/* ]] || [ -d ../.svn ]
+    then
+        continue
+    fi
     echo == Updating $(basename $DIRECTORY)
     if [ -d .git/svn ]
     then
         echorun git svn fetch
         echorun git svn rebase
-    else
+    elif [ -d .git ]
+    then
         echorun git fetch --all
         if [ $GITUP -eq 0 ]
         then
@@ -27,19 +34,9 @@ do
         else
             echorun git pull --rebase
         fi
-    fi
-    echo
-done
-
-for SVN in $(find $CURRENT -name .svn)
-do
-    DIRECTORY=$(dirname $SVN)
-    cd $DIRECTORY
-    if [ -d ../.svn ]
+    elif [ -d .svn ]
     then
-        continue
+        echorun svn update
     fi
-    echo == Updating $(basename $DIRECTORY)
-    echorun svn update
     echo
 done
