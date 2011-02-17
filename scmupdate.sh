@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Update all Git and Subversion repositories under the current directory.
 
 which git-up 1>/dev/null
