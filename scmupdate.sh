@@ -1,8 +1,6 @@
 #!/bin/bash
 # Update all Git and Subversion repositories under the current directory.
 
-which git-up 1>/dev/null
-GITUP=$?
 CURRENT=$PWD
 # Set to newline to loop over find output correctly on spaced paths.
 IFS=$'\n'
@@ -28,12 +26,7 @@ do
     elif [ -d .git ]
     then
         echorun git fetch --all
-        if [ $GITUP -eq 0 ]
-        then
-            echorun git up
-        else
-            echorun git pull --rebase
-        fi
+        echorun git pull
     elif [ -d .svn ]
     then
         echorun svn update
