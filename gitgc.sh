@@ -17,8 +17,7 @@ do
     echo == Garbage collecting $(basename $DIRECTORY)
     if [ -d .git ]
     then
-        echorun git fsck
-        echorun git gc
+        echorun git gc --aggressive
     fi
     echo
 done
