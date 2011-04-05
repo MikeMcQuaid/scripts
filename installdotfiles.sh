@@ -5,11 +5,18 @@ DOTFILESDIRREL=$(dirname $0)/dotfiles
 cd $DOTFILESDIRREL
 DOTFILESDIR=$(pwd -P)
 for DOTFILE in *; do
+	HOMEFILE="$HOME/.$DOTFILE"
+	DIRFILE="$DOTFILESDIR/$DOTFILE"
 	if [[ $(uname -s) != MINGW* ]]
 	then
-		rm -iv "$HOME/.$DOTFILE"
-		ln -sv "$DOTFILESDIR/$DOTFILE" "$HOME/.$DOTFILE"
+		if [[ -L "$HOMEFILE" ]]
+		then
+			ln -sfv "$DIRFILE" "$HOMEFILE"
+		else
+			rm -iv "$HOMEFILE"
+			ln -sv "$DIRFILE" "$HOMEFILE"
+		fi
 	else
-		cp -iv "$DOTFILESDIR/$DOTFILE" "$HOME/.$DOTFILE"
+		cp -iv "$DIRFILE" "$HOMEFILE"
 	fi
 done
