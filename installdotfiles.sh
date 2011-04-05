@@ -7,7 +7,8 @@ DOTFILESDIR=$(pwd -P)
 for DOTFILE in *; do
 	HOMEFILE="$HOME/.$DOTFILE"
 	DIRFILE="$DOTFILESDIR/$DOTFILE"
-	if [[ $(uname -s) != MINGW* ]]
+	# Matches Cygwin or MINGW
+	if [[ $(uname -s) != *_NT-* ]]
 	then
 		if [[ -L "$HOMEFILE" ]]
 		then
