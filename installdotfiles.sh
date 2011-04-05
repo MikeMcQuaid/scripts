@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Install all my dotfiles into my home directory
 
 DOTFILESDIRREL=$(dirname $0)/dotfiles
