@@ -1,3 +1,0 @@
-! Swap section and grave keys to fix Apple keyboards on VMWare fusion.
-keycode 94 = grave asciitilde grave asciitilde
-keycode 49 = section plusminus section plusminus
