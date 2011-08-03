@@ -3,7 +3,7 @@
 
 CURRENT=$PWD
 # Set to newline to loop over find output correctly on spaced paths.
-IFS=$'\n'
+IFS=$(printf '\n')
 
 function echorun {
     echo + $*
@@ -14,7 +14,7 @@ for SCM in $(find $CURRENT -name .git) $(find $CURRENT -name .svn)
 do
     DIRECTORY=$(dirname $SCM)
     cd $DIRECTORY
-    if [[ $DIRECTORY == */Tests/* ]] || [ -d ../.svn ]
+    if [ $DIRECTORY = */Tests/* ] || [ -d ../.svn ]
     then
         continue
     fi

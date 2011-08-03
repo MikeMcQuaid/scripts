@@ -1,9 +1,9 @@
-#!/bin/bash
+#!/bin/sh
 # Garbage collect all Git repositories under the current directory.
 
 CURRENT=$PWD
 # Set to newline to loop over find output correctly on spaced paths.
-IFS=$'\n'
+IFS=$(printf '\n')
 
 function echorun {
     echo + $*
