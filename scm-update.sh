@@ -5,7 +5,7 @@ CURRENT=$PWD
 # Set to newline to loop over find output correctly on spaced paths.
 IFS=$(printf '\n')
 
-function echorun {
+echorun() {
     echo + $*
     $*
 }
