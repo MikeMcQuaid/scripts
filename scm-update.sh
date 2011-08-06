@@ -1,9 +1,10 @@
-#!/bin/bash
+#!/bin/sh
 # Update all Git and Subversion repositories under the current directory.
 
 CURRENT=$PWD
 # Set to newline to loop over find output correctly on spaced paths.
-IFS=$(printf '\n')
+IFS="
+"
 
 echorun() {
     echo + $*
