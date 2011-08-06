@@ -1,1 +1,3 @@
-dotfiles/ssh/*
+dotfiles/ssh/authorized_keys
+dotfiles/ssh/*_rsa*
+dotfiles/ssh/known_hosts
