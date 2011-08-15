@@ -15,7 +15,7 @@ for SCM in $(find $CURRENT -name .git) $(find $CURRENT -name .svn)
 do
     DIRECTORY=$(dirname $SCM)
     cd $DIRECTORY
-    if [ $DIRECTORY = */Tests/* ] || [ -d ../.svn ]
+    if [ -d ../.svn ]
     then
         continue
     fi
