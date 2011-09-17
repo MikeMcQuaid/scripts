@@ -8,7 +8,7 @@ for DOTFILE in *; do
 	HOMEFILE="$HOME/.$DOTFILE"
 	DIRFILE="$DOTFILESDIR/$DOTFILE"
 	# Matches Cygwin or MINGW
-	if $(uname -s) | grep -q "_NT-"
+	if uname -s | grep -q "_NT-"
 	then
 		if [ -L "$HOMEFILE" ]
 		then
