@@ -23,15 +23,11 @@ do
     if [ -d .git/svn ]
     then
         echorun git svn fetch
-        echorun git stash
         echorun git svn rebase
-        echorun git stash apply
     elif [ -d .git ]
     then
         echorun git fetch --all
-        echorun git stash
         echorun git pull
-        echorun git stash apply
     elif [ -d .svn ]
     then
         echorun svn update
