@@ -23,7 +23,7 @@ svn_root() {
 svn_git_checkout() {
     if echo $@ | grep "://"
     then
-        svn checkout $@ 
+        svn $@
         return
     fi
 
