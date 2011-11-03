@@ -83,7 +83,7 @@ case "$1" in
         svn_git_checkout $@
         ;;
     log)
-        svn $@|less
+        svn $@|less -FX
         ;;
     branch)
         SVN_ROOT=$(svn_root)
@@ -95,7 +95,7 @@ case "$1" in
         ;;
     diff)
         [ -n "$DIFF" ] && DIFF_ARG="--diff-cmd=$DIFF"
-        svn $DIFF_ARG $@|less
+        svn $DIFF_ARG $@|less -FXR
         ;;
     *)
         svn $@
