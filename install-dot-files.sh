@@ -18,6 +18,6 @@ for DOTFILE in *; do
 			ln -sv "$DIRFILE" "$HOMEFILE"
 		fi
 	else
-		cp -iv "$DIRFILE" "$HOMEFILE"
+		cp -irv "$DIRFILE" "$HOMEFILE"
 	fi
 done
