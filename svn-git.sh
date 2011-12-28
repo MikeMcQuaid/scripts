@@ -21,9 +21,9 @@ svn_root() {
 
 # Makes changing branches in Subversion more like Git
 svn_git_checkout() {
-    if echo $@ | grep "://"
+    if echo "$@" | grep "://"
     then
-        svn $@
+        svn "$@"
         return
     fi
 
@@ -77,13 +77,13 @@ svn_git_checkout() {
 
 case "$1" in
     co)
-        svn_git_checkout $@
+        svn_git_checkout "$@"
         ;;
     checkout)
-        svn_git_checkout $@
+        svn_git_checkout "$@"
         ;;
     log)
-        svn $@|less -FX
+        svn "$@"|less -FX
         ;;
     branch)
         SVN_ROOT=$(svn_root)
@@ -95,10 +95,10 @@ case "$1" in
         ;;
     diff)
         [ -n "$DIFF" ] && DIFF_ARG="--diff-cmd=$DIFF"
-        svn $DIFF_ARG $@|less -FXR
+        svn $DIFF_ARG "$@"|less -FXR
         ;;
     *)
-        svn $@
+        svn "$@"
         ;;
 esac
 
