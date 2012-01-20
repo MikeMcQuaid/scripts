@@ -7,7 +7,7 @@ IFS="
 "
 
 echorun() {
-    echo + $*
+    echo + "$@"
     $*
 }
 
