@@ -5,8 +5,6 @@
 set -e
 
 mkdir -p ~/Pictures/Wallpapers/
-mv ~/Downloads/*_*_*x*.jpg ~/Pictures/Wallpapers/
-
 cd ~/Pictures/Wallpapers/
 autoload zmv
-zmv -v '*_(*)_*x*.jpg' '$1.jpg'
+zmv -v ~/Downloads/'*_(*)_*x*'.jpg ~/Pictures/Wallpapers/'$1'.jpg
