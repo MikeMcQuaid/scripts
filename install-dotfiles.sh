@@ -6,18 +6,19 @@ cd $DOTFILESDIRREL
 DOTFILESDIR=$(pwd -P)
 for DOTFILE in *; do
 	HOMEFILE="$HOME/.$DOTFILE"
+	[ -d $DOTFILE ] && DOTFILE="$DOTFILE/"
 	DIRFILE="$DOTFILESDIR/$DOTFILE"
 	# Matches Cygwin or MINGW
 	if ! uname -s | grep -q "_NT-"
 	then
-		if [ -L "$HOMEFILE" ]
+		if [ -L "$HOMEFILE" ] && ! [ -d $DOTFILE ]
 		then
 			ln -sfv "$DIRFILE" "$HOMEFILE"
 		else
-			rm -irv "$HOMEFILE"
+			rm -rv "$HOMEFILE"
 			ln -sv "$DIRFILE" "$HOMEFILE"
 		fi
 	else
-		cp -irv "$DIRFILE" "$HOMEFILE"
+		cp -rv "$DIRFILE" "$HOMEFILE"
 	fi
 done
