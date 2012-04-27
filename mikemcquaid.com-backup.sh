@@ -6,14 +6,14 @@ set -e
 LOCAL=/home/mike/Documents/Backup/Local
 REMOTE=/home/mike/Documents/Backup/Remote
 
-# Backup Wordpress files
+# Backup website files
 cd /var/www/
 tar jvcf $LOCAL/www.tar.bz2 *
 
 # Backup Wordpress database
-USERNAME=$(grep DB_USER /var/www/wp-config.php | awk -F "'" '{print $4}')
-DATABASE=$(grep DB_NAME /var/www/wp-config.php | awk -F "'" '{print $4}')
-PASSWORD=$(grep DB_PASSWORD /var/www/wp-config.php | awk -F "'" '{print $4}')
+USERNAME=$(grep DB_USER /var/www/wordpress/wp-config.php | awk -F "'" '{print $4}')
+DATABASE=$(grep DB_NAME /var/www/wordpress/wp-config.php | awk -F "'" '{print $4}')
+PASSWORD=$(grep DB_PASSWORD /var/www/wordpress/wp-config.php | awk -F "'" '{print $4}')
 mysqldump -u "$USERNAME" --database "$DATABASE" --password="$PASSWORD" \
 	| bzip2 -c > $LOCAL/wordpress.sql.bz2
 
