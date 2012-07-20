@@ -15,7 +15,7 @@ for SCM in $(find $CURRENT -name .git) $(find $CURRENT -name .svn)
 do
     DIRECTORY=$(dirname $SCM)
     cd $DIRECTORY
-    if [ -d ../.svn ]
+    if [ -d ../.svn ] || echo $DIRECTORY | grep -q "vendor/ruby"
     then
         continue
     fi
