@@ -1,7 +1,7 @@
 #!/bin/sh
 # Set email for all git repositories under the current directory.
 
-EMAIL="mike.mcquaid@kdab.com"
+EMAIL="mike@alltrails.com"
 
 CURRENT=$PWD
 # Set to newline to loop over find output correctly on spaced paths.
