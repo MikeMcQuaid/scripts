@@ -8,31 +8,24 @@ if [ -z "$5" ]
 then
     FILEPATH="$4"
 else
-    HTTPPATH="$4"
+    MOVEPATH="$4"
     FILEPATH="$5"
 fi
 
 FILENAME=$(basename "$FILEPATH")
 HTTPFILE=${FILENAME//" "/"%20"}
-
-if [ -z "$HTTPPATH" ]
-then
-    HTTP="http://$UPLOADHOST/~$USER/$HTTPFILE"
-else
-    HTTP="$HTTPPATH/$HTTPFILE"
-fi
+HTTP="http://$UPLOADHOST/~$USER/$HTTPFILE"
 
 SCP="$USER@$UPLOADHOST:$WWWDIR/"
 scp "$FILEPATH" "$SCP"
-if [ $? -ne 0 ]
-then
-    echo "$FILEPATH failed to upload to $SCP"
-else
-    echo "$FILEPATH uploaded to $HTTP"
+[ $? -ne 0 ] && echo "$FILEPATH failed to upload to $SCP" && exit 1
 
-    if [ $OSX ]
-    then
-        echo $HTTP | pbcopy
-        echo "URL copied to clipboard."
-    fi
+echo "$FILEPATH uploaded to $HTTP"
+
+if [ $OSX ]
+then
+    echo $HTTP | pbcopy
+    echo "URL copied to clipboard."
 fi
+
+[ -n "$MOVEPATH" ] && mv -v "$FILEPATH" "$MOVEPATH"
