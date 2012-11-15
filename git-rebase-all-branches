@@ -1,0 +1,14 @@
+#!/bin/sh
+# Rebase all branches on top of origin/master (or origin/staging for staging)
+
+GIT_CURRENT_BRANCH=$(git symbolic-ref HEAD|sed -e 's/refs.heads.//')
+
+git fetch --all
+
+git checkout staging && git rebase origin/staging
+for i in $(git branch|egrep -v '\*|staging')
+do
+	git checkout $i && git rebase origin/master
+done
+
+git checkout $GIT_CURRENT_BRANCH
