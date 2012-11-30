@@ -4,7 +4,7 @@
 # Exit on any command failures
 set -e
 
-BREW_CLEAN_WHITELIST=~/.brew-clean-whitelist
+BREW_CLEAN_WHITELIST=~/.brew-cleanup-installed
 [ -s $BREW_CLEAN_WHITELIST ]
 BREW_LIST=$TMPDIR/brew-list
 
