@@ -23,5 +23,6 @@ do
 	rm -rf $DIRECTORY
 done
 
-[ $DIRECTORY_REMOVED ] && exit 1
+[ $DIRECTORY_REMOVED ] && echo "Please rerun to remove more CLT files" && exit 1
 pkgutil --forget com.apple.pkg.DeveloperToolsCLI
+echo "Removed all CLT files"
