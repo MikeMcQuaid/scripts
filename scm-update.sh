@@ -27,7 +27,7 @@ do
     elif [ -d .git ]
     then
         echorun git fetch --all
-        echorun git pull
+        [ -n "$(git remote -v)" ] && echorun git pull
     elif [ -d .svn ]
     then
         echorun svn update
