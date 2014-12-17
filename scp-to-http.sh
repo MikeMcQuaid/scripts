@@ -22,7 +22,7 @@ scp "$FILEPATH" "$SCP"
 
 echo "$FILEPATH uploaded to $HTTP"
 
-if [ $OSX ]
+if [ $(uname -s) = "Darwin" ]
 then
   echo $HTTP | pbcopy
   echo "URL copied to clipboard."
