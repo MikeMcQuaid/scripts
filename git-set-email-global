@@ -10,14 +10,14 @@ IFS="
 
 for SCM in $(find -L $CURRENT -name .git)
 do
-    DIRECTORY=$(dirname $SCM)
-    cd $DIRECTORY
-    if [ -d .git ]
+  DIRECTORY=$(dirname $SCM)
+  cd $DIRECTORY
+  if [ -d .git ]
+  then
+    if ! git config --local --get user.email >/dev/null
     then
-        if ! git config --local --get user.email >/dev/null
-        then
-           echo == Setting email to $EMAIL for $(basename $DIRECTORY)
-           git config --local --add user.email $EMAIL
-        fi
+      echo == Setting email to $EMAIL for $(basename $DIRECTORY)
+      git config --local --add user.email $EMAIL
     fi
+  fi
 done

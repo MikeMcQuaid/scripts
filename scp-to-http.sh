@@ -6,10 +6,10 @@ UPLOADHOST="$2"
 WWWDIR="$3"
 if [ -z "$5" ]
 then
-    FILEPATH="$4"
+  FILEPATH="$4"
 else
-    MOVEPATH="$4"
-    FILEPATH="$5"
+  MOVEPATH="$4"
+  FILEPATH="$5"
 fi
 
 FILENAME=$(basename "$FILEPATH")
@@ -24,8 +24,8 @@ echo "$FILEPATH uploaded to $HTTP"
 
 if [ $OSX ]
 then
-    echo $HTTP | pbcopy
-    echo "URL copied to clipboard."
+  echo $HTTP | pbcopy
+  echo "URL copied to clipboard."
 fi
 
 [ -n "$MOVEPATH" ] && mv -v "$FILEPATH" "$MOVEPATH"
