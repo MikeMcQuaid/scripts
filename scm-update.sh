@@ -27,7 +27,10 @@ do
   elif [ -d .git ]
   then
     echorun git fetch --all
-    [ -n "$(git remote -v)" ] && echorun git pull
+    if [ -n "$(git remote -v)" ]; then
+      echorun git pull
+      git branch --merged | grep -v 'master' | grep -v '*' | xargs -n 1 git branch -d
+    fi
   elif [ -d .svn ]
   then
     echorun svn update
