@@ -28,8 +28,9 @@ do
   then
     echorun git fetch --all
     if [ -n "$(git remote -v)" ]; then
-      echorun git pull
-      git branch --merged | grep -v 'master' | grep -v '*' | xargs -n 1 git branch -d
+      echorun git checkout --quiet master
+      echorun git merge --no-edit --ff-only origin/master
+      git branch --merged | grep -v '*' | xargs -n 1 git branch -d
     fi
   elif [ -d .svn ]
   then
