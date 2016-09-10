@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Commit all modified files in commits with one modified file per commit
+for FILENAME in $(git ls-files)
+do
+  MESSAGE="$(echo "$FILENAME" | sed -e 's|^Library/Homebrew/||' \
+                                     -e 's|^Formula/||' \
+                                     -e 's/\.rb//' \
+                                     -e 's/$/:/')"
+  echo git commit "$FILENAME" --message="$MESSAGE"
+  exit
+done
