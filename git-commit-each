@@ -1,12 +1,11 @@
 #!/bin/bash
 
 # Commit all modified files in commits with one modified file per commit
-for FILENAME in $(git ls-files)
+for FILENAME in $(git ls-files --modified)
 do
   MESSAGE="$(echo "$FILENAME" | sed -e 's|^Library/Homebrew/||' \
                                      -e 's|^Formula/||' \
                                      -e 's/\.rb//' \
-                                     -e 's/$/:/')"
-  echo git commit "$FILENAME" --message="$MESSAGE"
-  exit
+                                     -e 's/$/: /')"
+  git commit "$FILENAME" --message="${MESSAGE}${*}"
 done
