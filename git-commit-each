@@ -5,6 +5,7 @@ for FILENAME in $(git ls-files --modified)
 do
   MESSAGE="$(echo "$FILENAME" | sed -e 's|^Library/Homebrew/||' \
                                      -e 's|^Formula/||' \
+                                     -e 's|^Casks/||' \
                                      -e 's/\.rb//' \
                                      -e 's/$/: /')"
   git commit "$FILENAME" --message="${MESSAGE}${*}"
