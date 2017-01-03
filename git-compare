@@ -6,12 +6,14 @@ then
 fi
 
 /usr/bin/git --version
-/usr/bin/git $@
+/usr/bin/git "$@"
 echo
 
 git --version
-git $@
+git "$@"
 echo
 
 brew info libgit2 --json=v1 | jq -r '.[0].name + " " + .[0].installed[0].version'
-"$(brew --prefix libgit2)"/share/libgit2/examples/$@
+
+# shellcheck disable=SC2145
+"$(brew --prefix libgit2)"/share/libgit2/examples/"$@"

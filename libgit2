@@ -5,4 +5,5 @@ then
   exit 1
 fi
 
-"$(brew --prefix libgit2)"/share/libgit2/examples/$@
+# shellcheck disable=SC2145
+"$(brew --prefix libgit2)"/share/libgit2/examples/"$@"

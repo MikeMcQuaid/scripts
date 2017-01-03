@@ -8,7 +8,7 @@ git fetch --all
 git checkout staging && git rebase origin/staging
 for i in $(git branch|egrep -v '\*|staging')
 do
-  git checkout $i && git rebase origin/master
+  git checkout "$i" && git rebase origin/master
 done
 
-git checkout $GIT_CURRENT_BRANCH
+git checkout "$GIT_CURRENT_BRANCH"

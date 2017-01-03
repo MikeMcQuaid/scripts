@@ -11,12 +11,12 @@ svn_root() {
   done
 
   SVN_INFO_URL=$(svn info 2>/dev/null | grep URL:) || return
-  SVN_URL=$(echo $SVN_INFO | sed -e 's/URL: //')
-  SVN_BRANCH=$(echo $SVN_INFO | grep -oe '\(trunk\|branches/[^/]\+\|tags/[^/]\+\)')
+  SVN_URL=${SVN_INFO_URL//URL: /}
+  SVN_BRANCH=$(echo "$SVN_INFO_URL" | grep -oe '\(trunk\|branches/[^/]\+\|tags/[^/]\+\)')
   [ -n "$SVN_BRANCH" ] || return
   SVN_ROOT=${SVN_URL%$SVN_BRANCH}
   echo "$SVN_ROOT"
-  cd $OLDPWD
+  cd "$OLDPWD" || exit
 }
 
 # Makes changing branches in Subversion more like Git
@@ -33,12 +33,12 @@ svn_git_checkout() {
 
   SVN_ROOT=$(svn_root)
 
-  if [ $NEW_BRANCH != "trunk" ]
+  if [ "$NEW_BRANCH" != "trunk" ]
   then
     echo "Searching branches for $NEW_BRANCH"
-    for BRANCH in $(svn ls ${SVN_ROOT}/branches)
+    for BRANCH in $(svn ls "${SVN_ROOT}/branches")
     do
-      [ "$NEW_BRANCH/" != $BRANCH ] && continue
+      [ "$NEW_BRANCH/" != "$BRANCH" ] && continue
       FOUND_BRANCH="branches/$BRANCH"
       break
     done
@@ -46,9 +46,9 @@ svn_git_checkout() {
     if [ -z "$FOUND_BRANCH" ]
     then
       echo "Searching tags for $NEW_BRANCH"
-      for TAG in $(svn ls ${SVN_ROOT}/tags)
+      for TAG in $(svn ls "${SVN_ROOT}/tags")
       do
-        [ "$NEW_BRANCH/" != $TAG ] && continue
+        [ "$NEW_BRANCH/" != "$TAG" ] && continue
         FOUND_BRANCH="tags/$TAG"
         break
       done
@@ -57,7 +57,7 @@ svn_git_checkout() {
     if [ -z "$FOUND_BRANCH" ]
     then
       echo "Could not find a branch or tag named $NEW_BRANCH"
-      cd $OLDPWD
+      cd "$OLDPWD" || exit
       return
     else
       NEW_BRANCH="$FOUND_BRANCH"
@@ -72,7 +72,7 @@ svn_git_checkout() {
 
   echo svn switch "$SVN_ROOT$NEW_BRANCH"
   svn switch "$SVN_ROOT$NEW_BRANCH"
-  cd $OLDPWD
+  cd "$OLDPWD" || exit
 }
 
 case "$1" in
@@ -88,18 +88,19 @@ case "$1" in
   branch)
     SVN_ROOT=$(svn_root)
     echo "Branches:"
-    svn ls ${SVN_ROOT}/branches
+    svn ls "${SVN_ROOT}/branches"
     echo
     echo "Tags:"
-    svn ls ${SVN_ROOT}/tags
+    svn ls "${SVN_ROOT}/tags"
     ;;
   diff)
     [ -n "$DIFF" ] && DIFF_ARG="--diff-cmd=$DIFF"
-    svn $DIFF_ARG "$@"|less -FXR
+    svn "$DIFF_ARG" "$@"|less -FXR
     ;;
   *)
     svn "$@"
     ;;
 esac
 
-alias svn=$SVN_ALIAS
+# shellcheck disable=SC2139
+alias svn="$SVN_ALIAS"

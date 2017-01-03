@@ -8,18 +8,18 @@ IFS="
 
 echorun() {
   echo + "$@"
-  $*
+  "$@"
 }
 
-for SCM in $(find -L $CURRENT -name .git) $(find $CURRENT -name .svn)
+find -L "$CURRENT" \( -name .git -or -name .svn \) -print0 | while read -d '' -r SCM
 do
-  DIRECTORY=$(dirname $SCM)
-  cd $DIRECTORY
-  if [ -d ../.svn ] || echo $DIRECTORY | grep -q "vendor/ruby"
+  DIRECTORY="$(dirname "$SCM")"
+  cd "$DIRECTORY" || continue
+  if [ -d ../.svn ] || echo "$DIRECTORY" | grep -q "vendor/ruby"
   then
     continue
   fi
-  echo == Updating $(basename $DIRECTORY)
+  echo "== Updating $(basename "$DIRECTORY")"
   if [ -d .git/svn ]
   then
     echorun git svn fetch
@@ -30,7 +30,7 @@ do
     if [ -n "$(git remote -v)" ]; then
       echorun git checkout --quiet master
       echorun git merge --no-edit --ff-only origin/master
-      git branch --merged | grep -v '*' | xargs -n 1 git branch -d
+      git branch --merged | grep -v '\*' | xargs -n 1 git branch -d
     fi
   elif [ -d .svn ]
   then

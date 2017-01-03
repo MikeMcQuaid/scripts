@@ -7,6 +7,6 @@ then
 fi
 
 # Kill all instances of FileMerge already running
-ps x | grep FileMerge | grep -v grep | cut -d' ' -f1 | xargs kill
+pkill FileMerge
 # Pipe output from opendiff to make it wait for FileMerge to exit
 opendiff "$@" | cat
