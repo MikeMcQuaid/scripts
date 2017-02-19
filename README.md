@@ -7,5 +7,5 @@ Everything under [`thirdparty`](https://github.com/mikemcquaid/scripts/tree/mast
 [Mike McQuaid](mailto:mike@mikemcquaid.com)
 
 ## License
-The scripts I wrote (i.e. not those under [`thirdparty`](https://github.com/mikemcquaid/scripts/tree/master/thirdparty)) are licensed under the [MIT License](http://en.wikipedia.org/wiki/MIT_License).
+The scripts I wrote (i.e. not those under [`thirdparty`](https://github.com/mikemcquaid/scripts/tree/master/thirdparty)) are licensed under the [GPLv3 License](https://en.wikipedia.org/wiki/GNU_General_Public_License).
 The full license text is available in [LICENSE.txt](https://github.com/mikemcquaid/scripts/blob/master/LICENSE.txt).
