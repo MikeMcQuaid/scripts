@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -e
+
+hub remote add "$1"
+git fetch "$1"
