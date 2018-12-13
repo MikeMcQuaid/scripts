@@ -20,6 +20,8 @@ def gem_like_version(version)
                           .tr("_", "."))
 end
 
+@rbenv_versions.mkpath
+
 homebrew_ruby_versions.flat_map(&:children)
                       .sort_by(&method(:gem_like_version))
                       .each(&method(:link_rbenv_version_without_revision))
